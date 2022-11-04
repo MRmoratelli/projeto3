@@ -1,3 +1,8 @@
+const totals = [
+  [300, 250],
+  [300, null],
+  [300, 250],
+];
 const produtosCart = {
   1: {
     name: "produto 1",
@@ -22,7 +27,7 @@ const produtosCart = {
       "https://images-americanas.b2w.io/produtos/5807792601/imagens/shape-april-maple-yuto-horigome-8-0/5807792678_2_large.jpg",
     ],
     price: 300.0,
-    // promo_price: 250.0,
+    promo_price: null,
     percent: 15,
     categories: [2, 3],
     quantity: 5,
