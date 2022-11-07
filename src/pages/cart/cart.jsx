@@ -1,26 +1,20 @@
-import { Grid, List, ListItem, ListItemAvatar, Stack, Typography, Avatar, TextField, Button } from "@mui/material";
+import { Grid, List, ListItem, ListItemAvatar, Stack, Typography, TextField, Button } from "@mui/material";
 import  React from "react"; 
 import { produtosCart } from "./products-cart";
+import { calculateTotal, calculatePromo } from "../../utils/calculate";
 import DeleteIcon from "@mui/icons-material/Delete"
 import IconButton from '@mui/material/IconButton';
 import "./cart.css";
 import {Link} from "react-router-dom"
 
 const cart = () => {
-    const totals = [
-        [300, 250],
-        [300, null],
-        [300, 250]
-    ]
-    const total = totals.reduce((pValue, cValue) => {
-        return cValue[0] + pValue   
-    }, 0)
-    const totalPromo = totals.reduce((pValue, cValue) => {
-        if (cValue[1]){
-            return cValue[0] - cValue[1] + pValue
-        }
-        return 0 + pValue   
-    }, 0)
+  const totals = Object.keys(produtosCart).map(id => {
+    let qtd = produtosCart[id].quantity;
+    return [produtosCart[id].price * qtd, produtosCart[id].promo_price * qtd]
+  });
+
+  const total = calculateTotal(totals);
+ const totalPromo = calculatePromo(totals);
 
     return <Grid container spacing={2} sx={{
         padding: '40px',
@@ -187,19 +181,3 @@ const cart = () => {
     </Grid>
 }
 export default cart;
-{/* <ListItemText
-          primary="Titulo do produto"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Descriçao do produto
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        /> */}
