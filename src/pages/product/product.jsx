@@ -1,6 +1,6 @@
 import React from "react"; 
 import { useState, useEffect } from "react"; 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { products, categories } from '../catalog/products';
 import {
     Grid, Typography, Stack, Button, TextField, Chip, IconButton
@@ -10,6 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 const product = () => {
+    const navigate = useNavigate()
     const params = useParams();
     const [currentImage, setCurrentImage] = useState(""); 
     const [quantity, setQuantity] = useState(1);
@@ -76,10 +77,11 @@ const product = () => {
                 <AddIcon color='primary'/>
             </IconButton>
         </div>
-        <Button variant="contained" size="large"endIcon={<ShoppingCartIcon/>} className="productItem_buy">Comprar</Button>
+        <Button onClick = {() => navigate("/checkout")} variant="contained" size="large" endIcon={<ShoppingCartIcon/>} className="productItem_buy">Comprar</Button>
+      
        </Grid>
     </Grid>
-
+ 
 }
 export default product;
 
